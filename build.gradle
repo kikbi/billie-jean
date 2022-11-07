@@ -1,0 +1,46 @@
+plugins {
+    id 'org.jetbrains.intellij' version '1.8.0'
+    id 'java'
+    id "io.freefair.lombok" version "6.5.0-rc1"
+}
+
+group 'derek.tool'
+version '1.2.0'
+
+JavaVersion.VERSION_11
+
+repositories {
+    mavenLocal()
+    maven { url "https://maven.aliyun.com/repository/public" }
+    maven { url "https://www.jetbrains.com/intellij-repository/releases" }
+    maven { url "https://cache-redirector.jetbrains.com/intellij-dependencies" }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.hibernate:hibernate-core:5.6.5.Final'
+    implementation 'com.intellij:forms_rt:7.0.3'
+    implementation 'com.formdev:flatlaf:2.4'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version = '2022.1'
+    plugins = ['com.intellij.java']
+    updateSinceUntilBuild = false
+    sameSinceUntilBuild = false
+}
+
+patchPluginXml {
+    pluginDescription = file(descriptionFile).text
+    changeNotes = file(changesFile).text
+}
+test {
+    useJUnitPlatform()
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

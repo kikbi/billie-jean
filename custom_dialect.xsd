@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+
+<xs:schema
+        id="customDialect"
+        targetNamespace="http://derek.tool.sql"
+        xmlns="http://derek.tool.sql"
+        elementFormDefault="qualified"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+    <xs:element name="dialect">
+        <xs:complexType>
+            <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                <xs:choice minOccurs="0">
+                    <xs:element name="extendDb">
+                        <xs:complexType>
+                            <xs:attribute name="dbName" type="xs:string"/>
+                            <xs:attribute name="majorVersion" type="xs:int"/>
+                            <xs:attribute name="minorVersion" type="xs:int"/>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+                <xs:element name="dbInfo">
+                    <xs:complexType>
+                        <xs:attribute name="dbName" type="xs:string"/>
+                        <xs:attribute name="majorVersion" type="xs:int"/>
+                        <xs:attribute name="minorVersion" type="xs:int"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="types">
+                    <xs:complexType>
+                        <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                            <xs:element name="type">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        <![CDATA[
+                                            This class maps a type to names. Associations may be marked with a capacity. Calling the get() method with a type and actual size n will return the associated name with smallest capacity >= n, if available and an unmarked default type otherwise. Eg, setting
+                                            names.put( type,        "TEXT" );
+                                            names.put( type,   255, "VARCHAR($l)" );
+                                            names.put( type, 65534, "LONGVARCHAR($l)" );
+
+                                            will give you back the following:
+                                            names.get( type )         // --> "TEXT" (default)
+                                            names.get( type,    100 ) // --> "VARCHAR(100)" (100 is in [0:255])
+                                            names.get( type,   1000 ) // --> "LONGVARCHAR(1000)" (1000 is in [256:65534])
+                                            names.get( type, 100000 ) // --> "TEXT" (default)
+
+                                            On the other hand, simply putting
+                                            names.put( type, "VARCHAR($l)" );
+
+                                            would result in
+                                            names.get( type )        // --> "VARCHAR($l)" (will cause trouble)
+                                            names.get( type, 100 )   // --> "VARCHAR(100)"
+                                            names.get( type, 10000 ) // --> "VARCHAR(10000)"
+                                            ]]>
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence maxOccurs="unbounded">
+                                        <xs:element name="jdbcType" type="sql_type">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    <![CDATA[ that defines the constants that are used to identify generic SQL types, called JDBC types. ]]>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="typePattern" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    <![CDATA[ place holder: $l,$s,$p which means length,scale,precision ]]>
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:choice maxOccurs="unbounded" minOccurs="0">
+                                            <xs:element name="capacity" type="xs:int"/>
+                                        </xs:choice>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="sql_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BIT"/>
+            <xs:enumeration value="TINYINT"/>
+            <xs:enumeration value="SMALLINT"/>
+            <xs:enumeration value="INTEGER"/>
+            <xs:enumeration value="BIGINT"/>
+            <xs:enumeration value="FLOAT"/>
+            <xs:enumeration value="REAL"/>
+            <xs:enumeration value="DOUBLE"/>
+            <xs:enumeration value="NUMERIC"/>
+            <xs:enumeration value="DECIMAL"/>
+            <xs:enumeration value="CHAR"/>
+            <xs:enumeration value="VARCHAR"/>
+            <xs:enumeration value="LONGVARCHAR"/>
+            <xs:enumeration value="DATE"/>
+            <xs:enumeration value="TIME"/>
+            <xs:enumeration value="TIMESTAMP"/>
+            <xs:enumeration value="BINARY"/>
+            <xs:enumeration value="VARBINARY"/>
+            <xs:enumeration value="LONGVARBINARY"/>
+            <xs:enumeration value="NULL"/>
+            <xs:enumeration value="OTHER"/>
+            <xs:enumeration value="JAVA_OBJECT"/>
+            <xs:enumeration value="DISTINCT"/>
+            <xs:enumeration value="STRUCT"/>
+            <xs:enumeration value="ARRAY"/>
+            <xs:enumeration value="BLOB"/>
+            <xs:enumeration value="CLOB"/>
+            <xs:enumeration value="REF"/>
+            <xs:enumeration value="DATALINK"/>
+            <xs:enumeration value="BOOLEAN"/>
+            <xs:enumeration value="ROWID"/>
+            <xs:enumeration value="NCHAR"/>
+            <xs:enumeration value="NVARCHAR"/>
+            <xs:enumeration value="LONGNVARCHAR"/>
+            <xs:enumeration value="NCLOB"/>
+            <xs:enumeration value="SQLXML"/>
+            <xs:enumeration value="REF_CURSOR"/>
+            <xs:enumeration value="TIME_WITH_TIMEZONE"/>
+            <xs:enumeration value="TIMESTAMP_WITH_TIMEZONE"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

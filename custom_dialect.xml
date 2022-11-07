@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<dialect xmlns="http://derek.tool.sql"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://derek.tool.sql custom_dialect.xsd">
+    <extendDb dbName="Mysql" majorVersion="0" minorVersion="0"/>
+    <dbInfo dbName="123" majorVersion="-1" minorVersion="0"/>
+    <types >
+        <type>
+            <jdbcType>VARCHAR</jdbcType>
+            <typePattern>varchar($l)</typePattern>
+            <capacity>255</capacity>
+        </type>
+        <type>
+            <jdbcType>VARCHAR</jdbcType>
+            <typePattern>text</typePattern>
+            <capacity>5000</capacity>
+        </type>
+        <type>
+            <jdbcType>INTEGER</jdbcType>
+            <typePattern>int</typePattern>
+            <capacity>1024</capacity>
+        </type>
+    </types>
+</dialect>

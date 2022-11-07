@@ -1,0 +1,31 @@
+<idea-plugin>
+    <id>derek.tool.billieJean</id>
+    <name>Billie Jean</name>
+    <vendor email="k71953@163.com" url="http://coocraft.cn">derek</vendor>
+
+    <description><![CDATA[ Description will be added by gradle build]]>
+    </description>
+
+    <change-notes><![CDATA[change notes will be added by gradle build]]>
+    </change-notes>
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <notificationGroup id="Derek.SQL.GenTableStatement"
+                           displayType="BALLOON" />
+        <projectService serviceImplementation="derek.tool.sql.config.PersistentDialogConfig"/>
+        <applicationConfigurable instance="derek.tool.sql.settings.CustomDialectSettings"
+                                 id="derek.tool.sql.settings.CustomDialectSettings.id" displayName="Custom Dialect"/>
+    </extensions>
+
+    <actions>
+        <action id="Derek.SQL.GenTableStatement" class="derek.tool.sql.GenCreationStatementAction" text="Gen Creation SQL"
+                icon="AllIcons.Debugger.Db_db_object" description="Generate table creation statement">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>
