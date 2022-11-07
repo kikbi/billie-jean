@@ -1,4 +1,4 @@
-# 简介
+# Introduction
 generate creation SQL according to class javadoc
 
 Right click in a class file to export, then select "Gen Creation SQL" menu
@@ -13,7 +13,7 @@ choose copy to clip board or export to specified file
 
 
 
-# v1 
+# version 1 
 
 - supported javadoc tag
   * @scale 1
@@ -56,7 +56,7 @@ e.g.
 
   example xml: https://gitee.com/Enoxacin/billie-jean/blob/master/custom_dialect.xml
 
-## 支持项列表
+## supporting list
 
 |   |  default  |  ext supporting  |
 | ------------ | ------------ | ------------ |
