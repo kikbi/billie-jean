@@ -6,11 +6,10 @@
 
 ## 导出界面
 
-![image1]
+![gen creation sql](https://github.com/kikbi/billie-jean/blob/main/creation_sql.png)
 
-![image2]
+![custom dialect](https://github.com/kikbi/billie-jean/blob/main/custom_dialect.jpg?raw=true)
 
-![image3]
 
 
 # v1 
