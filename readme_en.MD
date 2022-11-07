@@ -1,9 +1,9 @@
 # Introduction
 generate creation SQL according to class javadoc
 
-Right click in a class file to export, then select "Gen Creation SQL" menu
+right click in a class file and select "Gen Creation SQL" menu
 
-choose copy to clip board or export to specified file
+choose copying to clip board or exporting to specified file
 
 ## view
 
@@ -49,8 +49,8 @@ e.g.
 
  
 
-- support import custom dialect,  Settings->Custom Dialect
-- custom dialect xml needs to pass xsd verification
+- support importing custom dialect,  Settings->Custom Dialect
+- custom dialect xml file needs to pass xsd verification
   
   xsd: https://gitee.com/Enoxacin/billie-jean/blob/master/custom_dialect.xsd
 
